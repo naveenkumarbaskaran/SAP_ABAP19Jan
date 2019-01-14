@@ -45,16 +45,20 @@ PARAMETERS: p_carrid like scarr-carrid.
 
          DATA: lv_percent TYPE p DECIMALS 2,
                lv_carrname LIKE scarr-carrname.
-         STATICS : lv_cumpercent TYPE p DECIMALS 2.
+         STATICS : lv_cumpercent TYPE p DECIMALS 2,
+                   lv_flag.
 
-         SELECT SINGLE carrname FROM scarr into lv_carrname where carrid = p_carrid.
-           CHECK sy-subrc eq 0.
-           WRITE: / 'Total sales for', lv_carrname, ':', lgv_totalsales.
-           ULINE.
+            IF lv_flag IS INITIAL.
+             SELECT SINGLE carrname FROM scarr into lv_carrname where carrid = p_carrid.
+                WRITE: / 'Total sales for', lv_carrname, ':', lgv_totalsales.
+             ULINE.
+              lv_flag = 1.
+            ENDIF.
+
 
          lv_percent = ( lwa_sflight-paymentsum / lgv_totalsales ) * 100.
          lv_cumpercent = ( lv_cumpercent + lv_percent ) .
 
-        WRITE: / lwa_sflight-carrid, lwa_sflight-connid, lwa_sflight-fldate, lwa_sflight-paymentsum, lv_percent, lv_cumpercent.
+        WRITE: /3(2) lwa_sflight-carrid,  8(4) lwa_sflight-connid, 15 lwa_sflight-fldate, 21 lwa_sflight-paymentsum, lv_percent, lv_cumpercent.
 
           ENDFORM.
