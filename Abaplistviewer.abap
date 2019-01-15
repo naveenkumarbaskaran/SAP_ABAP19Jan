@@ -58,7 +58,7 @@ TYPE-POOLS: slis.
 
      FORM data_retrive.
 
-       SELECT * FROM sflight into TABLE it_sflight UP TO 10 ROWS.
+       SELECT * FROM sflight into TABLE it_sflight UP TO 30 ROWS.
 
          ENDFORM.
 
@@ -70,13 +70,18 @@ TYPE-POOLS: slis.
         APPEND wa_fieldcatalog to it_fieldcatalog.
         CLEAR wa_fieldcatalog.
          wa_fieldcatalog-fieldname = 'CONNID'.
-         wa_fieldcatalog-seltext_m = 'Flight connection Number'.
+         wa_fieldcatalog-seltext_m = 'Flight connectionNumber'.
          wa_fieldcatalog-col_pos = 1.
           APPEND wa_fieldcatalog to it_fieldcatalog.
         CLEAR wa_fieldcatalog.
          wa_fieldcatalog-fieldname = 'FLDATE'.
-        wa_fieldcatalog-seltext_m = 'PRICE'.
+        wa_fieldcatalog-seltext_m = 'Flight Date'.
         wa_fieldcatalog-col_pos = 2.
+        APPEND wa_fieldcatalog to it_fieldcatalog.
+        CLEAR wa_fieldcatalog.
+          wa_fieldcatalog-fieldname = 'PAYMENTSUM'.
+        wa_fieldcatalog-seltext_m = 'Payment SUM'.
+        wa_fieldcatalog-col_pos = 3.
         APPEND wa_fieldcatalog to it_fieldcatalog.
         CLEAR wa_fieldcatalog.
        ENDFORM.
