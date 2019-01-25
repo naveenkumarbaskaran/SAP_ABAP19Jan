@@ -1,0 +1,13 @@
+@AbapCatalog.sqlViewName: 'ZNAV_CDS_SB'
+@AbapCatalog.compiler.compareFilter: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'CDS VIEW FOR SBOOK'
+define view ZNAV_CDSVIEW_SBOOK as select from sbook as sb {
+key sb.connid,
+sb.fldate,
+sum( sb.loccuram ) as total_revenue_on_ticket_sale
+}
+group by
+sb.connid,
+sb.fldate,
+sb.loccuram
